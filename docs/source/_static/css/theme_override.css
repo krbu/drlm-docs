@@ -8,31 +8,31 @@ button,
 input,
 select,
 textarea {
-	/*font-family: 'Inconsolata', 'PT Mono', monospace;*/ 
-  /*font-family: 'Overpass', sans-serif !important;*/
+  /* font-family: 'Inconsolata', 'PT Mono', monospace; */ 
+  /* font-family: 'Overpass', sans-serif !important; */
 }
 
 h1, h2, h3, h4, h5, h6 {
-	/*font-family: 'Inconsolata', 'PT Sans Narrow', sans-serif;*/
-  /*font-family: 'Overpass', sans-serif !important;*/
+  /* font-family: 'Inconsolata', 'PT Sans Narrow', sans-serif; */
+  /* font-family: 'Overpass', sans-serif !important; */
   color: #e30613;
 }
 
 h2 {
-   font-size: 150%;
-   background-color: none;
-   border-bottom: 1px solid #ccc;
+  font-size: 150%;
+  background-color: none;
+  border-bottom: 1px solid #ccc;
 }
 
 p, li {
-    font-family: 'Overpass', sans-serif !important;
-    font-size: 15px !important;
-    line-height: 1.6em;
-    color: #666666;
+  font-family: 'Overpass', sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.6em;
+  color: #666666;
 }
 
 .caption-text {
-   color: #e30613;
+  color: #e30613;
  }
 
 .wy-nav-content a {
@@ -47,48 +47,48 @@ p, li {
    MAIN THEME
 */
 .wy-side-nav-search {
-   background-color: #343131;
+  background-color: #343131;
 }
 
 .wy-side-nav-search input[type="text"] {
-   /* border-color: #272525; */
-   border-color: #343131;
+  /* border-color: #272525; */
+  border-color: #343131;
 }
 
 .wy-nav-top {
-   /* display: block; */
-   background: #343131;
+  /* display: block; */
+  background: #343131;
 }
 
 .wy-nav-content {
-   max-width: none;
+  max-width: none;
 }
 
 div[class^='highlight'] {
-   border-radius: 0px;
-   background: #EFF3F5;
+  border-radius: 0px;
+  background: #EFF3F5;
 }
 
 .rst-content dl:not(.docutils) dt {
-   background: none;
-   border-top: solid 1px #CFCFCF;
+  background: none;
+  border-top: solid 1px #CFCFCF;
 }
 
 .rst-content dl:not(.docutils) tt {
-   background-color: #ECF0F3;
-   /* font-weight: normal; */
+  background-color: #ECF0F3;
+  /* font-weight: normal; */
 }
 
 .rst-content dl:not(.docutils) tt.descname {
-   font-weight: bold;
-   font-size: 120%;
+  font-weight: bold;
+  font-size: 120%;
 }
 
 .rst-content dl:not(.docutils) tt.descclassname {
-   background-color: transparent;
-   font-family: monospace;
-   font-weight: lighter;
-   font-size: 120%;
+  background-color: transparent;
+  font-family: monospace;
+  font-weight: lighter;
+  font-size: 120%;
 }
 
 /*
