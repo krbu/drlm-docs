@@ -87,6 +87,29 @@ If the client is not network reachable when you want to register it in the datab
     ~# drlm addclient -c clientHost1 -M 00-40-77-DB-33-38 -i 13.74.90.10
     ~# drlm addclient --client clientHost1 --macaddr 00-40-77-DB-33-38 -i 13.74.90.10
 
+.. option:: -a client_id, --add client_id
+
+  Add client VIP to client.
+
+  Examples:
+
+  .. code-block:: console
+
+    ~# drlm addclient -c clientHost1 -a 101
+    ~# drlm addclient --client clientHost1 --add 101
+
+.. option:: -d client_id, --del client_id
+
+  Delete client VIP from client.
+
+  Examples:
+
+  .. code-block:: console
+
+    ~# drlm addclient -c clientHost1 -d 101
+    ~# drlm addclient --client clientHost1 --del 101
+
+
 Help option:
 
 .. option:: -h, --help

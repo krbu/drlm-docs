@@ -4,38 +4,49 @@ DRLM Quick Start Guide
 DRLM Installation
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Follow the steps at `DRLM Installation <./Install.html#drlm-installation>`_. (Select your OS)
+Download, build and install DRLM from source code. (For more information, see `DRLM Installation <./Install.html>`_)
 
+.. code-block:: bash
+
+  ~# bash < <(curl -sSL https://drlm.org/install.sh)
+
+.. note:: 
+  It is assumed that you have performed a minimal installation of the selected distribution, **dedicated exclusively** to running the DRLM server.
 
 Add Client to DRLM Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Once DRLM server is istalled we can add a ReaR client with the command "drlm addclient" and the parameters -i "Client IP", -c "ReaR client name" and -I to automatically install ReaR client. The client needs to have an open SSH. By default the root user is used. You can specify another user with the ``-u <user>`` parameter. This user needs admin privileges
+Once the DRLM server is installed we can add clients with the command ``drlm addclient`` and the parameters ``-i <Client IP>``, ``-c <Client name>``
+
+To install the client automatically, you can use the ``-I`` parameter. This is why the client must be accessible via SSH. By default the root user is used, but you can specify another user with the ``-u <user>`` parameter. This user needs administrator privileges.
 
 .. code-block:: console
 
-    ~# drlm addclient -i 192.168.181.53 -c ReaRCli1 -I
+  ~# drlm -v addclient -i 192.168.181.53 -c ReaRCli1 -I
 
 
 Run Client Backup
 ~~~~~~~~~~~~~~~~~
 
-We are ready to take OS backups!!! At this point we have the DRLM server and ReaR client configured, you just have to run the command "drlm runbackup" with the parameter -c "ReaR client host name"
+We are ready to take OS backups!!! 
+
+At this point we have the DRLM server and client configured, you just have to run the command ``drlm runbackup`` with the parameter ``-c <Client name``
 
 .. code-block:: console
 
-    ~# drlm runbackup -c ReaRCli1
+    ~# drlm -v runbackup -c ReaRCli1
 
+List Clients & Backups
+~~~~~~~~~~~~~~~~~~~~~~
+
+To list the clients and their backups, you can use the command ``drlm listclient`` and ``drlm listbackup``
+
+.. code-block:: console
+
+    ~# drlm listclient
+    ~# drlm listbackup
 
 Restore Client Backup
 ~~~~~~~~~~~~~~~~~~~~~
 
 Follow the steps at `DRLM Client Recover <./Restore.html>`_.
-
-
-Quick Start Asciinema
-~~~~~~~~~~~~~~~~~~~~~
-
-.. raw:: html
-
-  <script id="asciicast-1xYIfv4YPwf9I9InmBDU9bPGm" src="https://asciinema.org/a/1xYIfv4YPwf9I9InmBDU9bPGm.js" async></script>

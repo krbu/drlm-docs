@@ -36,12 +36,12 @@ chapter that details each release.
   * Hot maintenance capability. A client backup can be made online
     while the system is running.
 
-  * Command line interface. DRLM doesnot require a graphical
+  * Command line interface. DRLM does not require a graphical
     interface to run. (console is enough).
 
   * Multiarch netboot client support (x86_64-efi, i386-efi, i386-pc, powerpc-ieee1275)
 
-  * Automatic client intallation from DRLM server
+  * Automatic client installation from DRLM server
 
   * Parallel backups
 
@@ -55,11 +55,93 @@ chapter that details each release.
 
       - Mail
 
-  * Centralized backup scheduling with a job scheduler
+      - XML/JSON
+
+      - Telegram
+
+  * Centralized backup scheduling with a job scheduler and backup policy
 
   * Export and Import backup between DRLM servers or DRLM clients
 
   * Real time clients log in DRLM server
+
+DRLM Version 2.4.12 (April 2024) - Release Notes
+--------------------------------------------------
+  * Bugfix in listbackup when no backups are available
+
+  * Bugfix in listclient when no clients are available
+
+  * Bugfix in listnetwork when no networks are available
+
+  * Bugfix in listjob when no jobs are available
+
+  * NEW! Virtual IP support to backup active cluster services
+
+  * Removed unmaintained Docker support
+
+  * NEW! Backup Policy support
+
+  * Bugfix in API listing holded snaps
+
+  * NEW! Ubuntu 24.04 client & server support
+
+DRLM Version 2.4.11 (March 2024) - Release Notes
+--------------------------------------------------
+  * NEW! RAWDISK output backup type supported
+
+  * Updated Suse 15 ReaR repositories
+
+  * Bugfix in web, holded backups are not shown
+
+  * New install script
+
+  * Bugfix in installclient adding network interface
+
+  * Check client shell before installclient
+
+  * Bugfix in DRLM pre and post runbackup script
+
+  * Added ability to adjust client configs upon migrations on rescue startup
+
+  * Added ReaR tunning to avoid mac mapping on automatic restore
+
+  * NEW! Telegram error reporting supported
+
+  * NEW! Configurable error reporting message
+
+  * NEW! Toggle pretty mode from command line in all lists
+
+  * Bugfix in get_client_used_mb
+
+  * Bugfix in Debian12 scheduled jobs
+
+  * Bugfix in install clients, force non-interactive installations
+
+DRLM Version 2.4.10 (February 2023) - Release Notes
+---------------------------------------------------
+  * Bugfix in installclient tunnig_rear function
+
+  * Bugfix avoid duplicate settings in /etc/drlm/local.conf during update or install process
+
+  * Bugfix in user deletion to skip error code 12
+
+  * NEW! XML/JSON error reporting supported
+
+  * Bugfix in impbackup client configuration
+
+  * Bugfix runbackup umounting previous backups
+
+  * Bugfix runbackup rsync hidden warning errors
+
+DRLM Version 2.4.9 (December 2022) - Release Notes
+--------------------------------------------------
+  * Bugfix in importbackup Debian nbd detach
+
+  * Bugfix getting Client OS version fixed
+
+  * Bugfix sending DRLM server hostname
+
+  * Bugfix getting SSH_ROOT_PASSWORD from local.conf or site.conf
 
 DRLM Version 2.4.8 (November 2022) - Release Notes
 --------------------------------------------------

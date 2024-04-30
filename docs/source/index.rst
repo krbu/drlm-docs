@@ -1,11 +1,9 @@
 About DRLM Docs
 ===============
 
-
 DRLM Docs contains comprehensive documentation on the DRLM (Disaster Recovery Linux Manager). This page describes documentation’s licensing, editions, and versions, and describes how to contribute to the DRLM Docs.
 
 For more information on DRLM, see `About DRLM Project <http://drlm.org>`_. To download DRLM, see the downloads page.
-
 
 
 License
@@ -14,7 +12,6 @@ License
 This documentation is licensed under a Creative Commons `Attribution-NonCommercial-ShareAlike 4.0 International <http://creativecommons.org/licenses/by-nc-sa/4.0/>`_ (i.e. “CC-BY-NC-SA”) license.
 
 The DRLM Manual is copyright © 2024 Brain Updaters, S.L.
-
 
 
 Contributing
@@ -28,8 +25,6 @@ To contribute to documentation the Github interface enables users to report erra
 .. note:: This documentation is under constant development. Please be patient...
 
 
-
-
 Contents:
 =========
 
@@ -37,9 +32,8 @@ Contents:
    :maxdepth: 2
    :caption: User Documentation
 
-   Install
    QuickStart
-   ClientConfig
+   Install
    Restore
    ErrorReporting
 

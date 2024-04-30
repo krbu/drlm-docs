@@ -13,62 +13,79 @@ Default Client Configuration
   #         (Configuration examples in /usr/share/drlm/conf/samples/)           #
   ###############################################################################
 
-  # DRLM v2.4.8
+  # DRLM v2.4.12
   #
 
+  # ================================
   # DRLM automatically generates a ReaR configuration file in function of three
   # variable values, DRLM_BKP_TYPE,  DRLM_BKP_PROT and DRLM_BKP_PROG.
+
+  # Default backup type, protocol and program are
   #
-  # DRLM_BKP_TYPE --> backup type (ISO, ISO_FULL, ISO_FULL_TMP, PXE or DATA)
+  #DRLM_BKP_TYPE=ISO
+  #DRLM_BKP_PROT=RSYNC
+  #DRLM_BKP_PROG=RSYNC
+
+  # =====
+  # DRLM_BKP_TYPE --> backup type (ISO, ISO_FULL, ISO_FULL_TMP, PXE, RAWDISK or DATA)
   # DRLM_BKP_PROT --> transport protocol (RSYNC or NETFS)
   # DRLM_BKP_PROG --> backup program (RSYNC or TAR)
-  #
+
+  # =====
   # Backup type ISO generates a rescue image in ISO format and backup data is stored
   # in a DRLM server directory.
   #
-  # DRLM_BKP_TYPE=ISO (Default)
-  #  |-- DRLM_BKP_PROT="RSYNC" (Default)
-  #  |-- DRLM_BKP_PROT="NETFS"
-  #       |-- DRLM_BKP_PROG="TAR"
-  #       |-- DRLM_BKP_PROG="RSYNC"
-  #
+  # DRLM_BKP_TYPE=ISO
+  #  |-- DRLM_BKP_PROT=RSYNC
+  #  |-- DRLM_BKP_PROT=NETFS
+  #       |-- DRLM_BKP_PROG=TAR
+  #       |-- DRLM_BKP_PROG=RSYNC
+
+  # =====
   # Backup type ISO_FULL generates a rescue image in ISO format that also contains the data
   # Is important to know that the iso image is generated in the client and once done is send
-  # to DRLM server. For that the client needs to have as mush free space as its own ISO. If
+  # to DRLM server. For that the client needs to have as much free space as its own ISO. If
   # the client have not enough free space to generate the ISO is possible to user ISO_FULL_TMP
   # that generates the ISO image in a NFS temporaly directory of DRLM server.
   #
   # DRLM_BKP_TYPE=ISO_FULL
   #   or
   # DRLM_BKP_TYPE=ISO_FULL_TMP:
-  #
+
+  # =====
   # Backup type PXE generates the PXE files suitable for booting with pxelinux over the network
   # and backup data is stored in a DRLM server directory.
   #
   # DRLM_BKP_TYPE=PXE
-  #  |-- DRLM_BKP_PROT="RSYNC"
-  #  |-- DRLM_BKP_PROT="NETFS" 
-  #       |-- DRLM_BKP_PROG="TAR"
-  #       |-- DRLM_BKP_PROG="RSYNC"
+  #  |-- DRLM_BKP_PROT=RSYNC
+  #  |-- DRLM_BKP_PROT=NETFS
+  #       |-- DRLM_BKP_PROG=TAR
+  #       |-- DRLM_BKP_PROG=RSYNC
+
+  # =====
+  # Backup type RAWDISK generates a rescue image in RAWDISK format. Backup data is stored in a 
+  # DRLM server directory.
   #
+  # DRLM_BKP_TYPE=RAWDISK
+  #  |-- DRLM_BKP_PROT=RSYNC
+  #  |-- DRLM_BKP_PROT=NETFS
+  #       |-- DRLM_BKP_PROG=TAR
+  #       |-- DRLM_BKP_PROG=RSYNC
+
+  # =====
   # Backup type DATA only does data bakup, it does not generate a rescue image. Backup type DATA
   # must be used in conjunction with the parameter BACKUP_PROG_INCLUDE described below and it
   # may be useful to use it by enabling incremental backups, DRLM_INCREMENTAL, also described below.
-  #
+
+  # =====
   # DRLM_BKP_TYPE=DATA
-  #  |-- DRLM_BKP_PROT="RSYNC" (Default)
-  #  |-- DRLM_BKP_PROT="NETFS"
-  #      |-- DRLM_BKP_PROG="TAR"
-  #      |-- DRLM_BKP_PROG="RSYNC"
+  #  |-- DRLM_BKP_PROT=RSYNC #(Default)
+  #  |-- DRLM_BKP_PROT=NETFS
+  #      |-- DRLM_BKP_PROG=TAR
+  #      |-- DRLM_BKP_PROG=RSYNC
 
 
-  # Default backup type, protocol and program
-  #
-
-  #DRLM_BKP_TYPE="ISO"
-  #DRLM_BKP_PROT="RSYNC"
-  #DRLM_BKP_PROG="RSYNC"
-
+  # ================================
   # SSH_ROOT_PASSWORD defines a password for remote access to the recovery system as 'root' via SSH
   # without requiring a public/private key pair. This password is valid only while the recovery system
   # is running and will not allow access afterwards to the restored target system.
@@ -95,6 +112,61 @@ Default Client Configuration
   #
   #HISTBKPMAX=2
 
+  # ===============================
+  # ==== Backup Policy Config =====
+  # ===============================
+
+  # Backup Policy Rules
+  # The backup policy rules are defined in the BKP_POLICY_RULES array.
+  # Each rule is defined as a string with the following formats:
+  # 
+  ## DAYS
+  # [Number] [day] [from HH:MM to HH:MM]
+  # '7 day' --> 7 days from 00:00 to 23:59
+  #
+  ## WEEKS
+  # [Number] [week] ["Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun" "first" DEF:"last"] [from HH:MM to HH:MM]
+  # '8 week' --> 8 weeks from 00:00 to 23:59 on last day of the week
+  # '4 week Sun' --> 4 weeks from 00:00 to 23:59 on Sundays
+  # '8 week from 02:00 to 6:00' --> 8 weeks from 02:00 to 6:00
+  #
+  ## MONTHS
+  # [Number] [month] ["Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun" "first" DEF:"last"] [from HH:MM to HH:MM]
+  # '6 month' --> 6 months from 00:00 to 23:59 on last day of the month
+  # '6 month Sun' --> 6 months from 00:00 to 23:59 on Sundays
+  # '6 month Sun from 02:00 to 6:00' --> 6 months from 02:00 to 6:00 on Sundays
+  # '6 month first' --> 6 months from 00:00 to 23:59 on first day of the month
+  #
+  ## YEARS
+  # [Number] [year] ["Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun" "first" DEF:"last"] [from HH:MM to HH:MM]
+  # '4 year' --> 4 years from 00:00 to 23:59 on last day of the year
+  # '4 year Sun' --> 4 years from 00:00 to 23:59 on last Sunday of the year
+  # '4 year Sun from 02:00 to 6:00' --> keep newest backup of last Sunday from 02:00 to 6:00 of the last 4 years  
+  #
+  ## SPECIAL DATES
+  # [Number or #(all)] [YYYYMMDD ('_' = any single character | '%' = any sequence of characters)] [from HH:MM to HH:MM]
+  # '4 ____1001' --> keep newest backup of the last 4 years of the 1st of October
+  # '# ____0725' --> keep newest backup of each 25th of July
+  # '# 202301% from 02:00 to 6:00' --> keep newest backup of each day of January of the year 2023 from 02:00 to 6:00
+
+  # Example of Backup Policy Rules
+  #
+  # BKP_POLICY_RULES=( 
+  #   '15 day'
+  #   '8 week'
+  #   '6 month Sun'
+  #   '4 year Sun'
+  # )
+
+  # # Backup Policy defaults
+  # BKP_POLICY_FDW="Mon"           # "Mon" "Sun"        (First Day of the Week)
+  # BKP_POLICY_SAVE="newest"       # "newest" "oldest"  (If there are multiple backups within the same day/hour range, specify which one to keep)
+  # BKP_POLICY_FROM_HOUR="00:00"   # "00:00" to "23:59" (Backup Policy start time)
+  # BKP_POLICY_TO_HOUR="23:59" 	 # "00:00" to "23:59" (Backup Policy end time)
+
+  # To apply the backup policy rules, set BKP_POLICY_AUTO_APPLY to "true" and at the end of each backup the backup policy rules will be applied.
+  # BKP_POLICY_AUTO_APPLY="false"  # "true" "false"     (Apply the backup policy rules automatically)
+
   # ================================
   # ===== Incremental Backups ======
   # ================================
@@ -114,6 +186,31 @@ Default Client Configuration
   # 2 - New inherited DR File. When DRLM_INCREMENTAL_HIST is exceeded makes a New DR File from last backup. 
   #
   #DRLM_INCREMENTAL_BEHAVIOR=1
+
+  # ================================
+  # == DRLM DEFAULT BACKUP STATUS ==
+  # ================================
+
+  # Default backup status after a run backup.
+  # DRLM_DEFAULT_BKP_STATUS=[ enabled | disabled | write | full-write ]
+  #      enabled: Enabled in read only mode
+  #      disabed: Disabed
+  #        write: Enabled in local read/write mode
+  #   full-write: Enabled in local and remote read/write mode
+  #
+  #DRLM_DEFAULT_BKP_STATUS="enabled"
+
+  ################ ---- DRLM_ENCRYPTION
+  #
+  # DRLM_ENCRYPTION=[ disabled | enabled ]
+  #
+  # The encryption key must be base64 encoded = 'echo "password" | base64'
+  # DRLM_ENCRYPTION_KEY
+  #
+  ########
+
+  #DRLM_ENCRYPTION="enabled"
+  #DRLM_ENCRYPTION_KEY=
 
   # ================================
   # ======= Pretty Options =========

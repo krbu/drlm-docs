@@ -153,6 +153,16 @@ The :program:`drlm listbackup` has some options:
    ~# drlm listbackup -c clientHost1 --pretty
    ~# drlm listbackup --pretty
 
+.. option:: -P, --policy
+
+   List backups showing the policy used to keep the backup. The policy is defined in the configuration file of the client.
+
+   Examples::
+
+   ~# drlm listbackup -P
+   ~# drlm listbackup -c clientHost1 --policy
+   ~# drlm listbackup --policy
+
 Help option:
 
 .. option:: -h,--help
