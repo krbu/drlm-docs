@@ -3,18 +3,7 @@
 */
 @import url("http://overpass-30e2.kxcdn.com/overpass.css");
 
-body,
-button,
-input,
-select,
-textarea {
-  /* font-family: 'Inconsolata', 'PT Mono', monospace; */ 
-  /* font-family: 'Overpass', sans-serif !important; */
-}
-
 h1, h2, h3, h4, h5, h6 {
-  /* font-family: 'Inconsolata', 'PT Sans Narrow', sans-serif; */
-  /* font-family: 'Overpass', sans-serif !important; */
   color: #e30613;
 }
 
@@ -51,12 +40,10 @@ p, li {
 }
 
 .wy-side-nav-search input[type="text"] {
-  /* border-color: #272525; */
   border-color: #343131;
 }
 
 .wy-nav-top {
-  /* display: block; */
   background: #343131;
 }
 
@@ -76,7 +63,6 @@ div[class^='highlight'] {
 
 .rst-content dl:not(.docutils) tt {
   background-color: #ECF0F3;
-  /* font-weight: normal; */
 }
 
 .rst-content dl:not(.docutils) tt.descname {
@@ -89,126 +75,4 @@ div[class^='highlight'] {
   font-family: monospace;
   font-weight: lighter;
   font-size: 120%;
-}
-
-/*
-   HEADER
-*/
-#header-drlm {
-   /* Size */
-   width: 100%;
-
-   /* Position */
-   position: fixed;
-   top: 0;
-   left: 0;
-   z-index: 1000;
-   padding: 1.5em;
-
-   /* Visual */
-   background-color: #3c3c3c;
-   border-bottom: 7px solid #cc0000;
-}
-
-#header-drlm a {
-   /* Size */
-   min-height: 35px;
-
-   /* Position */
-   float: left;
-   padding: 0 35px;
-}
-
-#header-drlm #logo-drlm {
-   /* Size */
-   max-width: 121px;
-   max-height: 35px;
-}
-
-#header-drlm nav {
-   /* Size */
-   width: calc(100% - 1.5em - 70px - 121px);
-
-   /* Position */
-   float: right;
-}
-
-#header-drlm nav ul li {
-   /* Position */
-   display: inline;
-}
-
-#header-drlm nav ul li a {
-   /* Size */
-   font-size: 15px;
-
-   /* Position */
-   line-height: 33.5px;
-   padding: 0 13px;
-
-   /* Size */
-   color: #ffffff;
-}
-
-#header-drlm-spacer {
-   /* Size */
-   height: 84px;
-}
-
-nav.wy-nav-side {
-   margin-top: 84px;
-}
-
-@media screen and (max-width: 918px) {
-   #header-drlm a {
-      /* Position */
-      line-height: 69px;
-   }
-
-   #header-drlm-spacer {
-      /* Size */
-      height: 119px;
-   }
-
-   nav.wy-nav-side {
-      /* Position */
-      margin-top: 119px;
-   }
-}
-
-@media screen and (max-width: 768px) {
-   #header-drlm {
-      /* Position */
-      padding: 1em;
-      text-align: center;
-
-      /* Visual */
-      border: none;
-   }
-
-   #header-drlm a {
-      /* Position */
-      line-height: initial;
-      float: none;
-   }
-
-   #header-drlm nav {
-      /* Visual */
-      display: none;
-   }
-
-   #header-drlm-spacer {
-      /* Size */
-      height: 63px;
-   }
-
-   nav.wy-nav-side {
-      /* Position */
-      margin-top: 63px;
-   }
-
-   .wy-nav-content-wrap.shift {
-      /* Position */
-      top: 63px;
-   }
 }

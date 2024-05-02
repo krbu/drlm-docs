@@ -9,7 +9,8 @@ To install DRLM, execute the following command in the terminal as the root user 
 
   bash < <(curl -sSL https://drlm.org/install.sh)
 
-
+If the installation fails you can try the `DRLM Step by Step Installation <./manual_Install.html>`_ to find out where it fails and/or report the error to `DRLM Installation <./About.html#contributing>`_
+ 
 
 Supported OS versions
 ~~~~~~~~~~~~~~~~~~~~~

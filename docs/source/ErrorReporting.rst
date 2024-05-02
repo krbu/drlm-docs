@@ -3,8 +3,8 @@ Error Reporting Configuration
 
 DRLM can be configured to report errors on scheduled backups if required.
 Is possible to report by mail or integrating with your monitoring service.
-At this time (DRLM 2.0) we support error reporting by mail and integration
-with Nagios, Zabbix and HPOM(OVO) monitoring services.
+At this time (DRLM 2.4) we support error reporting by mail and integration
+with Nagios, Zabbix and HPOM(OVO) monitoring services, Telegram, XML and JSON.
 
 .. note::
   All reporting configuration samples are located in: /usr/share/drlm/conf/samples
@@ -12,21 +12,29 @@ with Nagios, Zabbix and HPOM(OVO) monitoring services.
 Enable DRLM reporting
 ---------------------
 
+First of all, you need to enable error reporting on DRLM by setting ERR_REPORT=yes in /etc/drlm/local.conf.
+Then you need to define the REPORT_TYPE according to your monitoring service.
+Optionally you can define the ERR_MESSAGE to customize the error message.
+
 ::
 
   ~# vi /etc/drlm/local.conf
-   ########                                                                                                 
-   #                                                                                                        
-   # Defines HowTo report Errors using some known and wide used methods                                     
-   #                                                                                                        
-   #    ERR_REPORT=[yes|no]                                                                                 
-   #       default: no                                                                                      
-   #    REPORT_TYPE=[ovo|nsca-ng|nsca|nrdp|zabbix|mail]                                                     
-   #       default: empty                                                                                   
-   #                                                                                                        
-   ########                                                                                          
-   ERR_REPORT=no 
-   REPORT_TYPE=  
+  ########
+  #
+  # Defines HowTo report Errors using some known and wide used methods
+  #
+  #    ERR_REPORT=[yes|no]
+  #	default: no
+  #    REPORT_TYPE=[ovo|nsca-ng|nsca|nrdp|zabbix|mail|xml|json|telegram]
+  #	default: empty
+  #    ERR_MESSAGE
+  #	default: '$(Stamp)$PROGRAM:$WORKFLOW:$CLI_NAME:$CLI_CFG:ERROR: $@'
+  #
+  ########
+
+  ERR_REPORT=yes
+  REPORT_TYPE=[your_report_type]
+  ERR_MESSAGE='$(Stamp)$PROGRAM:$WORKFLOW:$CLI_NAME:$CLI_CFG:ERROR: $@' 
       
 Configure nrdp (Nagios based) reporting    
 --------------------------------------- 
@@ -333,3 +341,89 @@ The following options are DRLM defaults, change any of them acording to your ins
 .. note::
   The configuration on the server side is not in the scope of this documentation. Please check HPOM (OVO) documentation
   to configure properly the server side and define how to report DRLM alerts.
+
+XML/JSON reporting
+------------------
+
+In order to configure XML or JSON Error reporting on DRLM you need to define the REPORT_TYPE as xml or json.
+Then you need to define the DRLM_SEND_ERROR_URL to the desired URL to send the XML or JSON to.
+
+::
+
+  # REPORT_TYPE=[xml|json]
+  #
+  # XML VARIABLES
+  # =============
+  #
+  # These are default values and can be overwritten in local.conf according to your XML installation and configuration.
+  #  DRLM_SEND_ERROR_BIN="/usr/sbin/drlm-send-error"   #Default drlm-send-error command path
+  #  DRLM_SEND_ERROR_URL="http://servertostorexml:9090/"	 #Desired URL to send the XML to
+  #  DRLM_SEND_ERROR_MSG=									 
+  #	If DRLM_SEND_ERROR_MSG is set to "" will be send a default error like the next one:
+  #
+  #			<drlm>
+  #			   <version>2.4.12-git</version>
+  #			   <type>ERROR</type>
+  #			   <server>drlmserver</server>
+  #			   <client>drlmclient</client>
+  #			   <configuration>default</configuration>
+  #			   <os>Debian 11.6</os>
+  #			   <rear>2.6/2020-06-17</rear>
+  #			   <workflow>runbackup</workflow>
+  #			   <message>2023-02-09 09:11:21 drlm:runbackup:drlmclient:ERROR: Client drlmclient SSH Server on 22 port is not available</message>
+  #			</drlm>
+  #
+  #   But DRLM_SEND_ERROR_MSG can be customized specifying an XML string containing DRLM runtime environment variables. 
+  #	For example: DRLM_SEND_ERROR_MSG='<drlm><server>$HOSTNAME</server><client>$CLI_NAME</client><nbd>$NBD_DEVICE</nbd><message>$ERRMSG</message></drlm>'
+  #	In the header of the runbackup scripts (/usr/share/drlm/backup/run/default/*.sh) you can find all the variables available at any time
+  #   
+  # JSON VARIABLES
+  # ==============
+  #
+  # These are default values and can be overwritten in local.conf according to your JSON installation and configuration.
+  #  DRLM_SEND_ERROR_BIN="/usr/sbin/drlm-send-error"       #Default drlm-send-error command path
+  #  DRLM_SEND_ERROR_URL="http://servertostorejson:9090/"	 #Desired URL to send the JSON to
+  #  DRLM_SEND_ERROR_MSG=									 
+  #	If DRLM_SEND_ERROR_MSG is set to "" will be send a default error like the next one:
+  #
+  #   {
+  #	  "program":"drlm", 
+  #	  "version":"2.4.12",
+  #	  "type":"ERROR",
+  #	  "server":"drlmserver",
+  #	  "client":"drlmclient",
+  #	  "configuration":"default",
+  #	  "os":"Debian 11.6",
+  #	  "rear":"2.6/2020-06-17",
+  #	  "workflow":"runbackup",
+  #	  "message":"2023-02-09 11:40:58 drlm:runbackup:drlmclient:ERROR: Client drlmclient SSH Server on 22 port is not available"
+  #	}
+  #
+  #   But DRLM_SEND_ERROR_MSG can be customized specifying an JSON string containing DRLM runtime environment variables. 
+  #	For example: DRLM_SEND_ERROR_MSG=''{\"name\":\"$HOSTNAME\", \"backup_type\":\"$DRLM_BKP_TYPE\", \"ERROR\":\"$ERRMSG\"}''
+  #	In the header of the runbackup scripts (/usr/share/drlm/backup/run/default/*.sh) you can find all the variables available at any time
+  #   
+
+  ERR_REPORT=yes
+  REPORT_TYPE=xml
+  ERR_MESSAGE='$(Stamp)$(hostname):$WORKFLOW:$CLI_NAME:$CLI_CFG:$DRLM_BKP_TYPE:ERROR: $@'
+
+  DRLM_SEND_ERROR_BIN="/usr/sbin/drlm-send-error"
+  DRLM_SEND_ERROR_URL="https://server_to_store_xml:9090/endpoint"
+  DRLM_SEND_ERROR_MSG=""
+
+Telegram reporting
+------------------
+
+In order to configure Telegram Error reporting on DRLM you need to create a Telegram Bot and get the token and chatid.
+DRLM uses **curl** binary to report errors to Telegram server.
+
+::
+
+  ERR_REPORT=yes
+  REPORT_TYPE=telegram
+  ERR_MESSAGE='$(Stamp)$(hostname):$WORKFLOW:$CLI_NAME:$CLI_CFG:$DRLM_BKP_TYPE:ERROR: $@'
+
+  TELEGRAM_CMD="/usr/bin/curl"
+  TELEGRAM_TOKEN="6664444777:ABFWZmTx_BEgXIxGzd9gjLYOhf69Xq0QWNR"
+  TELEGRAM_CHATID="-1430996632434" 

@@ -5,25 +5,45 @@ DRLM Docs contains comprehensive documentation on the DRLM (Disaster Recovery Li
 
 For more information on DRLM, see `About DRLM Project <http://drlm.org>`_. To download DRLM, see the downloads page.
 
+Product Features
+----------------
 
-License
--------
+The following features are supported on the most recent releases of
+DRLM. Anything labeled as (NEW!) was added as the most recent
+release. New functionality for previous releases can be seen in the next
+chapter that details each release.
 
-This documentation is licensed under a Creative Commons `Attribution-NonCommercial-ShareAlike 4.0 International <http://creativecommons.org/licenses/by-nc-sa/4.0/>`_ (i.e. “CC-BY-NC-SA”) license.
+  * Hot maintenance capability. A client backup can be made online
+    while the system is running.
 
-The DRLM Manual is copyright © 2024 Brain Updaters, S.L.
+  * Command line interface. DRLM does not require a graphical
+    interface to run. (console is enough).
 
+  * Multiarch netboot client support (x86_64-efi, i386-efi, i386-pc, powerpc-ieee1275)
 
-Contributing
-------------
+  * Automatic client installation from DRLM server
 
-Please, we encourage you to help us to improve this documentation.
+  * Parallel backups
 
-To contribute to documentation the Github interface enables users to report errata or missing sections, discuss improvements and new sections through the issue-tracker at: `DRLM Docs GitHub Issue Tracker <https://github.com/brainupdaters/drlm-docs/issues>`_.
+  * Error reporting support to:
 
+      - HP OpenView
 
-.. note:: This documentation is under constant development. Please be patient...
+      - Nagios (NSCA, NSCA-ng & NRDP)
 
+      - Zabbix
+
+      - Mail
+
+      - XML/JSON
+
+      - Telegram
+
+  * Centralized backup scheduling with a job scheduler and backup policy
+
+  * Export and Import backup between DRLM servers or DRLM clients
+
+  * Real time clients log in DRLM server
 
 Contents:
 =========
@@ -34,6 +54,7 @@ Contents:
 
    QuickStart
    Install
+   manual_Install
    Restore
    ErrorReporting
 
@@ -51,8 +72,9 @@ Contents:
    :caption: Client Configuration
 
    client_config_default
-   client_config_incremental_data
-   client_config_PXE
+   multiple_client_config
+   cluster_client_config
+   client_config_examples
 
 .. toctree::
    :maxdepth: 2
@@ -70,16 +92,9 @@ Contents:
 
    building_grub2
 
-.. note:: This section should change continously due to changes in DRLM development, please be patient.
-   Any question regarding DRLM development, please use `DRLM Dev Forum <https://groups.google.com/forum/#!forum/drlm-dev>`_. Thanks!
-
 .. toctree::
    :maxdepth: 1
    :caption: About Documentation
 
    About
 
-Indexes and tables
-==================
-
-* :ref:`genindex`

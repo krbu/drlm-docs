@@ -1,5 +1,5 @@
-DRLM Manual Installation
-========================
+DRLM Step by Step Installation
+==============================
 
 The aim of this manual is to provide a comprehensive, step-by-step guide to installing and configuring DRLM. By the end of this guide, you should have a fully operational DRLM server.
 

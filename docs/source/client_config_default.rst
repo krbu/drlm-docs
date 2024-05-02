@@ -171,7 +171,7 @@ Default Client Configuration
   # ===== Incremental Backups ======
   # ================================
 
-  # DRLM_INCREMENTAL by defautl incremental backups are disabled. Put
+  # DRLM_INCREMENTAL by default incremental backups are disabled. Put
   # this var to "yes" in order to enable
   #
   #DRLM_INCREMENTAL="yes"
