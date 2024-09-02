@@ -127,6 +127,8 @@ Help option:
 Install Client
 --------------
 
+.. important:: Since version *2.4.12* we use a new default install method with git. If [ -r, --repo ] or [ -U, --urlrear ] are used, these options will work as usual. 
+
 This command is used to install and configure DRLM and ReaR on a remote
 Server. It is called like this:
 

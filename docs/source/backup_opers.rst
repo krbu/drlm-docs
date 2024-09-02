@@ -56,6 +56,92 @@ Help option:
    ~# drlm runbackup -h
    ~# drlm runbackup --help
 
+
+Restore Backup
+--------------
+
+This command is used to restore backups from DRLM. It is
+called like this::
+
+   ~# drlm restore [options]
+
+.. warning::
+
+   This operation only works with backups of type *DATA* using *RSYNC*. 
+   You may need to enable desired backup to restore, see :ref:`List Backups` :ref:`Backup Manager`.
+
+The :program:`drlm restore` has several options:
+
+.. program:: `drlm restore`
+
+.. option:: -c client_name, --client client_name
+
+   Select Client to remotely run restore by name.
+
+   Examples::
+
+   ~# drlm restore -c clientHost1
+   ~# drlm restore --client clientHost1
+
+.. option:: -I client_id, --id client_id
+
+   Select Client to remotely run restore by ID.
+
+   Examples::
+
+   ~# drlm restore -I 12
+   ~# drlm restore --id 12
+
+.. option:: -C config_name, --config config_name
+
+   Since DRLM 2.4.0 it is possible to have multiple configurations for each Client. The configurations must be in **/etc/drlm/clients/client_name.cfg.d/** path and with **.cfg** extension (ex.: home_backup.cfg). 
+   With -C parameter is possible to select witch client backup configuration will be used. If is not especified, default configuration **/etc/drlm/clients/client_name.cfg** will be used 
+
+   Examples::
+
+   ~# drlm restore -c clientHost1 -C home_backup
+   ~# drlm restore --id 12 --config home_backup
+
+.. option:: -f /path/to/file.txt,/path/to/dir/, --files /path/to/file.txt,/path/to/dir/
+
+   Select comma separated list of files/dirs to restore (no regex!).
+
+   Examples::
+
+   ~# drlm restore -c clientHost1 -C home_backup -f /home/user1/,/home/user3/Desktop/image.jpg
+   ~# drlm restore --id 12 --config home_backup  --files /home/user2
+
+.. option:: -O, --overwrite
+
+   Overwrite files to original path. Use it with caution!.
+
+   .. danger::
+
+      By default, all restores will be done in **/var/tmp/drlm/restored/** directory on clients. 
+      Using this option will Overwrite data on destination client, so be careful!
+
+   Examples::
+
+   ~# drlm restore -c clientHost1 -C home_backup -O
+   ~# drlm restore --id 12 --config home_backup  --files /home/user2  --overwrite
+
+Help option:
+
+.. option:: -h, --help
+
+   Show drlm restore help.
+
+   Examples::
+
+   ~# drlm restore -h
+   ~# drlm restore --help
+
+.. tip::
+
+   You can restore data backups from a client using: **rear restorefiles**.
+   Specific files/dirs can be retrieved from the enabled DRLM backup: **rear restorefiles FILES_TO_RECOVER=/home/user1,/home/user3/image.jpg**.
+   All restored files will be  in **/var/tmp/drlm/restored/**.
+
 Delete Backup
 -------------
 

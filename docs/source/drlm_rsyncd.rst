@@ -1,7 +1,7 @@
 DRLM RSYNCD
 ===========
 
-Rsync daemon server for DRLM.
+Rsync server daemon for DRLM.
 
 
 Configuration
@@ -43,7 +43,7 @@ Stop DRLM RSYNCD
 Log File
 ~~~~~~~~
 
-The log file for DRLM PROXY can be found at /var/log/drlm/drlm-rsyncd.log
+The log file for DRLM RSYNCD can be found at /var/log/drlm/drlm-rsyncd.log
 
 example:
 
