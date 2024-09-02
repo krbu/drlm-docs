@@ -23,3 +23,8 @@ Stop DRLM TFTPD
 .. code-block:: console
 
   ~# systemctl stop drlm-tftpd.service
+
+.. hint::
+
+  If TFTP timeouts problems see issue: 
+    * https://github.com/brainupdaters/drlm/issues/129
