@@ -57,6 +57,7 @@ Contents:
    manual_Install
    Restore
    ErrorReporting
+   drlm_internal_backup
 
 .. toctree::
    :maxdepth: 2
@@ -85,6 +86,8 @@ Contents:
    drlm_stord
    drlm_rsyncd
    drlm_tftpd
+   drlm_stunnel
+   drlm_gitd
 
 .. toctree::
    :maxdepth: 2
