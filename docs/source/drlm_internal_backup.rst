@@ -108,5 +108,5 @@ Restore DRLM server from scratch
   All client backups are excluded by default to prevent a huge ISO image creation. You can customize the configuration to
   suit your needs and include some critical backups to recover fast.
 
-To recover a DRLM server from scrath just need to boot from the ISO image. After booting it will perform an unattended recover of the server.
-
+To recover a DRLM server from scratch just need to boot from the ISO image. After booting, select automatic recover and it will perform an unattended recover of the server.
+When finished it will restart and boot from recovered local disk.
