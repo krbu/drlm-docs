@@ -45,6 +45,16 @@ The :program:`drlm runbackup` has several options:
    ~# drlm runbackup -c clientHost1 -C home_backup
    ~# drlm runbackup --id 12 --config home_backup
 
+.. option:: -S
+
+   Scan for infected files after the backup is completed
+
+   Examples::
+
+   ~# drlm runbackup -c clientHost1 -S
+
+.. note:: This option is available on Enterprise Edition
+
 Help option:
 
 .. option:: -h, --help
@@ -581,3 +591,107 @@ Help option:
 
    ~# drlm sched -h
    ~# drlm sched --help
+
+
+Scan Backup
+-----------
+
+This command is used to scan for infected files on an existing backup.
+It is called like
+this::
+
+   ~# drlm scan [options]
+
+The :program:`drlm scan` has some required options:
+
+.. program:: `drlm scan`
+
+.. option:: -I backup_id, --id backup_id
+
+   Select Backup ID to scan
+
+.. option:: -c, --client
+
+   Scan enabled backup
+
+   Examples::
+
+   ~# drlm scan -I 1.20140519065512 
+   ~# drlm scan -c rear-centos
+
+Help option:
+
+.. option:: -h, --help
+
+   Show drlm scan help.
+
+   Examples::
+
+   ~# drlm scan -h
+   ~# drlm scan --help
+
+.. note:: This feature is available only for DRLM Enterprise.
+
+Archive Backup
+--------------
+
+This command is used to archive existing backups to the Cloud.
+It is called like
+this::
+
+   ~# drlm archive [options]
+
+The :program:`drlm archive` has some required options:
+
+.. program:: `drlm archive`
+
+.. option:: -I backup_id, --id backup_id
+
+   Select Backup ID to archive
+
+.. option:: -U, --upload
+
+   Upload backup to the Cloud
+
+   Examples::
+
+   ~# drlm archive -I 100.20240519065512 -U
+
+.. option:: -D, --download
+
+   Download backup from the Cloud
+
+   Examples::
+
+   ~# drlm archive -I 100.20240519065512 -D
+
+.. option:: -R, --remove
+
+   Remove backup from the Cloud
+
+   Examples::
+
+   ~# drlm archive -I 100.20240519065512 -R
+
+.. option:: -L, --list
+
+   Lists backups from the Cloud
+
+   Examples::
+
+   ~# drlm archive -L
+
+   ~# drlm archive -c client01 -L
+
+Help option:
+
+.. option:: -h, --help
+
+   Show drlm archive help.
+
+   Examples::
+
+   ~# drlm archive -h
+   ~# drlm archive --help
+
+.. note:: This feature is available only for DRLM Enterprise.
